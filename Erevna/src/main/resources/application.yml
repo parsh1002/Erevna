@@ -18,3 +18,7 @@ spring:
     multipart:
       max-file-size: 20MB
       max-request-size: 20MB
+  document:
+    chunk:
+      size: 1000
+      overlap: 200

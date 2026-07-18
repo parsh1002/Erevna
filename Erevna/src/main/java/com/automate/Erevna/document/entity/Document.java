@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -15,15 +16,20 @@ import java.time.LocalDateTime;
 public class Document {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private String name;
+
+    private String fileType;
+
+    private Long fileSize;
 
     @Column(columnDefinition = "TEXT")
     private String extractedText;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private DocumentStatus status;
 
     private LocalDateTime createdAt;
 
@@ -31,5 +37,10 @@ public class Document {
     public void onCreated(){
         createdAt = LocalDateTime.now();
     }
+
+    private LocalDateTime updatedAt;
+
+    @PreUpdate
+    public void onUpdate(){ updatedAt = LocalDateTime.now(); }
 
 }

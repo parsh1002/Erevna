@@ -1,4 +1,4 @@
-package com.automate.Erevna.document.service;
+package com.automate.Erevna.document.extractor;
 
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @Service
-public class PdfExtractionService {
+public class PdfExtractor {
 
     public String extractText(MultipartFile file){
         try(PDDocument document = Loader.loadPDF(file.getBytes())) {

@@ -1,6 +1,6 @@
 package com.automate.Erevna.document.controller;
 
-import com.automate.Erevna.document.DtoResponse.UploadResponse;
+import com.automate.Erevna.document.dto.response.UploadResponse;
 import com.automate.Erevna.document.entity.Document;
 import com.automate.Erevna.document.service.DocumentService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.security.InvalidKeyException;
 
 
 @RestController
@@ -19,7 +21,7 @@ public class DocumentController {
     private  final DocumentService documentService;
 
     @PostMapping("/upload")
-    public UploadResponse upload(@RequestParam("file")MultipartFile file){
+    public UploadResponse upload(@RequestParam("file")MultipartFile file) throws InvalidKeyException {
 
         Document document = documentService.uploadDocument(file);
 
@@ -27,6 +29,7 @@ public class DocumentController {
                 .documentId(document.getId())
                 .message("Document Uploaded Successfully")
                 .build();
+
 
     }
 
