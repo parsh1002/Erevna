@@ -10,9 +10,9 @@ import java.util.List;
 public class FixedSizeTextChunker {
 
     @Value("${document.chunk.size}")
-    private int size = 1000;
+    private int size;
     @Value("${document.chunk.overlap}")
-    private  int overlap;
+    private int overlap;
 
 
     public List<String> chunk(String text){

@@ -1,8 +1,19 @@
 spring:
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+
+      chat:
+        options:
+          model: llama3.2
+
+      embedding:
+        options:
+          model: nomic-embed-text
   datasource:
     url: jdbc:postgresql://localhost:5432/Erevna
     username: postgres
-    password: your_password
+    password: your_own_password
 
   jpa:
     hibernate:
@@ -18,7 +29,27 @@ spring:
     multipart:
       max-file-size: 20MB
       max-request-size: 20MB
-  document:
-    chunk:
-      size: 1000
-      overlap: 200
+document:
+  chunk:
+    size: 1000
+    overlap: 200
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    container_name: erevna-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: erevna
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

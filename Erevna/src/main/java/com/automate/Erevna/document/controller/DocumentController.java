@@ -14,13 +14,13 @@ import java.security.InvalidKeyException;
 
 
 @RestController
-@RequestMapping("/api/documents")
+@RequestMapping("/api/documents/")
 @RequiredArgsConstructor
 public class DocumentController {
 
     private  final DocumentService documentService;
 
-    @PostMapping("/upload")
+    @PostMapping("upload")
     public UploadResponse upload(@RequestParam("file")MultipartFile file) throws InvalidKeyException {
 
         Document document = documentService.uploadDocument(file);

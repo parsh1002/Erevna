@@ -1,13 +1,19 @@
 package com.automate.Erevna.document.processor;
 
 
+import com.automate.Erevna.document.chunker.FixedSizeTextChunker;
 import com.automate.Erevna.document.entity.Document;
+import com.automate.Erevna.document.entity.DocumentChunk;
 import com.automate.Erevna.document.entity.DocumentStatus;
 import com.automate.Erevna.document.extractor.PdfExtractor;
+import com.automate.Erevna.document.repository.DocumentChunkRepository;
 import com.automate.Erevna.document.repository.DocumentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -15,24 +21,44 @@ import org.springframework.web.multipart.MultipartFile;
 public class DocumentProcessor {
 
     private final PdfExtractor pdfExtractor;
+    private final FixedSizeTextChunker fixedSizeTextChunker;
+
 
     private final DocumentRepository documentRepository;
+    private final DocumentChunkRepository documentChunkRepository;
 
     public void process(Document document, MultipartFile file){
 
-        document.setStatus(DocumentStatus.PROCESSING);
-        documentRepository.save(document);
+        try {
+            String extractedText = pdfExtractor.extractText(file);
 
-        /*Even though the process is very fast and we dont need this first save
-        but in production level systems if the extraction of text takes about a few to many
-        seconds so it must show PORCESSING... in the frontend hence this */
+            document.setExtractedText(extractedText);
 
-        String extractedText = pdfExtractor.extractText(file);
+            List<String> chunks = fixedSizeTextChunker.chunk(extractedText);
 
-        document.setExtractedText(extractedText);
-        document.setStatus(DocumentStatus.READY);
+            List<DocumentChunk> documentChunks = new ArrayList<>();
 
-        documentRepository.save(document);
+            for(int i = 0; i<chunks.size(); i++){
+
+                DocumentChunk chunk =  new DocumentChunk();
+
+                chunk.setChunkIndex(i);
+                chunk.setContent(chunks.get(i));
+                chunk.setDocument(document);
+
+                documentChunks.add(chunk);
+
+            }
+            documentChunkRepository.saveAll(documentChunks);
+            document.setStatus(DocumentStatus.READY);
+
+            documentRepository.save(document);
+        } catch (Exception e) {
+            document.setStatus(DocumentStatus.FAILED);
+            documentRepository.save(document);
+
+            throw e;
+        }
     }
 
 

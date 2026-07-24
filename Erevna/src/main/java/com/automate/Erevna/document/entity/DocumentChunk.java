@@ -23,5 +23,8 @@ public class DocumentChunk {
     @Column(columnDefinition = "TEXT")
     private String content;
 
+    @Transient
+    private float[] embedding;
+
     
 }
