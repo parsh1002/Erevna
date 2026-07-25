@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: erevna
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: your_own_password
+      POSTGRES_PASSWORD:
 
     ports:
       - "5433:5432"

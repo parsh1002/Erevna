@@ -1,8 +1,6 @@
 package com.automate.Erevna.embedding;
 
 
-
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.stereotype.Service;

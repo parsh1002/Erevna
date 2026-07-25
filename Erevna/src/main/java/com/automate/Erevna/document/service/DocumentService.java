@@ -4,6 +4,8 @@ import com.automate.Erevna.document.entity.Document;
 import com.automate.Erevna.document.entity.DocumentStatus;
 import com.automate.Erevna.document.processor.DocumentProcessor;
 import com.automate.Erevna.document.repository.DocumentRepository;
+import com.automate.Erevna.document.repository.VectorRepository;
+import com.automate.Erevna.embedding.EmbeddingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +17,8 @@ public class DocumentService {
 
     private final DocumentRepository documentRepository;
     private final DocumentProcessor documentProcessor;
+    private final VectorRepository vectorRepository;
+    private final EmbeddingService embeddingService;
 
     public Document uploadDocument(MultipartFile file) {
         validate(file);

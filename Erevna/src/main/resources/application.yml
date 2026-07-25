@@ -11,9 +11,9 @@ spring:
         options:
           model: nomic-embed-text
   datasource:
-    url: jdbc:postgresql://localhost:5432/Erevna
+    url: jdbc:postgresql://localhost:5433/erevna
     username: postgres
-    password: your_own_password
+    password:
 
   jpa:
     hibernate:
@@ -33,23 +33,8 @@ document:
   chunk:
     size: 1000
     overlap: 200
-
-services:
-  postgres:
-    image: pgvector/pgvector:pg17
-    container_name: erevna-postgres
-    restart: unless-stopped
-
-    environment:
-      POSTGRES_DB: erevna
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-
-    ports:
-      - "5432:5432"
-
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-volumes:
-  postgres_data:
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: always
