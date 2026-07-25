@@ -4,7 +4,7 @@ import com.automate.Erevna.document.entity.Document;
 import com.automate.Erevna.document.entity.DocumentStatus;
 import com.automate.Erevna.document.processor.DocumentProcessor;
 import com.automate.Erevna.document.repository.DocumentRepository;
-import com.automate.Erevna.document.repository.VectorRepository;
+import com.automate.Erevna.vector.VectorRepository;
 import com.automate.Erevna.embedding.EmbeddingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
