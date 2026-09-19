@@ -13,7 +13,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5433/erevna
     username: postgres
-    password: 10Feb@2004
+    password: YOUR_PASSWORD
 
   jpa:
     hibernate:
