@@ -78,34 +78,12 @@ Containerization: Docker Compose
 
 Caching / Infrastructure: Redis
 
-📁 Project Structure
+## 📁 Project Structure : 
 
-com.automate.Erevna
-│
-├── chat
-│   ├── controller       # Chat REST APIs
-│   ├── dto              # Request/response objects
-│   └── service          # RAG and chat business logic
-│
-├── config               # AI configuration
-│
-├── document
-│   ├── chunker          # Text chunking logic
-│   ├── controller       # Document REST APIs
-│   ├── entity           # Document and chunk entities
-│   ├── extractor        # PDF text extraction
-│   ├── processor        # Document processing pipeline
-│   ├── repository       # Database access
-│   └── service          # Document business logic
-│
-├── embedding
-│   ├── controller        # Embedding test API
-│   └── service           # Embedding generation
-│
-└── vector
-    └── repository        # pgvector similarity search
+<img width="567" height="627" alt="image" src="https://github.com/user-attachments/assets/c73ba37d-7dfc-429c-95ae-b9357f50b1de" />
 
-⚙️ How Erevna Works
+
+## ⚙️ How Erevna Works
 
 1️⃣ Upload Document
 
@@ -162,15 +140,9 @@ Ollama / llama3.2
        ↓
 Generated Answer
 
-📡 API Endpoints
+## 📡 API Endpoints
 
 📄 Documents
-
-Method
-
-Endpoint
-
-Description
 
 POST
 
@@ -184,13 +156,7 @@ curl -X POST \
   http://localhost:8080/api/documents/upload \
   -F "file=@document.pdf"
 
-💬 Chat
-
-Method
-
-Endpoint
-
-Description
+## 💬 Chat
 
 POST
 
@@ -206,13 +172,7 @@ Request:
 
 The API generates an embedding for the question, retrieves relevant chunks using pgvector, and uses the retrieved context to generate the answer.
 
-🧠 Embeddings
-
-Method
-
-Endpoint
-
-Description
+## 🧠 Embeddings
 
 POST
 
@@ -220,7 +180,7 @@ POST
 
 Generate and inspect an embedding
 
-🧪 Performance
+## 🧪 Performance
 
 Erevna was benchmarked locally to evaluate document ingestion and semantic retrieval.
 
@@ -238,6 +198,8 @@ A 40-query evaluation set produced:
 
 74% answer accuracy
 
+84% hit rate
+
 Document Ingestion
 
 A benchmark document containing approximately 83K characters was processed into:
@@ -248,7 +210,7 @@ A benchmark document containing approximately 83K characters was processed into:
 
 These are local development measurements and can vary depending on hardware, model inference speed, document size, and database state.
 
-🔧 Local Setup
+## 🔧 Local Setup
 
 1️⃣ Clone the Repository
 
@@ -299,7 +261,7 @@ The application starts on:
 
 http://localhost:8080
 
-🧠 Core Logic Highlights
+## 🧠 Core Logic Highlights
 
 Fixed-size document chunking with overlap
 
@@ -315,7 +277,7 @@ RAG pipeline for document-grounded question answering
 
 Local LLM inference without requiring an external LLM API
 
-⚠️ Important Notes
+## ⚠️ Important Notes
 
 Ollama must be running locally for embeddings and chat generation.
 
@@ -327,7 +289,7 @@ LLM response time depends heavily on local hardware and model inference.
 
 The current retrieval pipeline uses a fixed Top-K value.
 
-🚀 Future Improvements
+## 🚀 Future Improvements
 
 Dockerize the complete application stack
 
@@ -347,7 +309,7 @@ Add automated retrieval and answer evaluation
 
 Improve scalability for larger document collections
 
-💡 What This Project Demonstrates
+## 💡 What This Project Demonstrates
 
 Building a production-oriented backend using Spring Boot
 
@@ -363,7 +325,7 @@ Measuring backend and retrieval performance
 
 Designing clean separation between controllers, services, repositories, and processing components
 
-👨‍💻 Author
+## 👨‍💻 Author
 
 Parshva Kumar J Jain
 
