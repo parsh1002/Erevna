@@ -1,4 +1,4 @@
-####🧠 Erevna
+##🧠 Erevna
 
 An AI-powered document knowledge and question-answering system built using Java, Spring Boot, Spring AI, PostgreSQL, pgvector, and Ollama.
 
